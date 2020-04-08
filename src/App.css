@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+
+.form-profile-add {
+  margin: 10px;
+}
+
+.profile-picture {
+  width: 170px;
+  height: 200px;
+}
