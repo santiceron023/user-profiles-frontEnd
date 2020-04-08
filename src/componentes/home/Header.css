@@ -1,0 +1,15 @@
+.header {
+  width: 10%;
+  display: inline-block;
+  text-align-last: start;
+  font-size: calc(10px + 2vmin);
+  color: green;
+}
+
+.nav-bar-header {
+  width: 70%;
+  text-align-last: start;
+  display: inline-block;
+  font-size: calc(10px + 2vmin);
+  color: rgb(49, 0, 128);
+}
