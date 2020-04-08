@@ -119,8 +119,8 @@ export default class ProfileAdd extends React.Component<Props, any> {
       data.append('file', this.state.selectedPhoto);
       ProfilesRepository.uploadPhoto(this.state.id, data)
         .then((response: any) => {
-          console.log('photo uploaded');
-          this.props.history.push(`/`)
+          const toBase64 = Buffer.from(response.data.data).toString('base64');
+          this.setState({photo: toBase64, selectedPhoto: null});
         })
         .catch(error => {
           //this.setState({errors: error.response.data});
