@@ -120,7 +120,7 @@ export default class ProfileAdd extends React.Component<Props, any> {
       ProfilesRepository.uploadPhoto(this.state.id, data)
         .then((response: any) => {
           console.log('photo uploaded');
-          this.props.history.push(`/profile`)
+          this.props.history.push(`/`)
         })
         .catch(error => {
           //this.setState({errors: error.response.data});

@@ -13,9 +13,8 @@ function App() {
         <Header/>
         <hr/>
         <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route path="/profile/add/:id" component={ProfileAdd}/>
-          <Route path="/profile" component={ProfileList}/>
+          <Route path="/add/:id" component={ProfileAdd}/>
+          <Route exact path="/" component={ProfileList}/>
         </Switch>
       </React.Fragment>
   );

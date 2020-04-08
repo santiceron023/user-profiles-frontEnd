@@ -39,7 +39,7 @@ export default class ProfileList extends React.Component<Props, any> {
                 <div className="card-body">
                   <h4 className="card-title">{name}</h4>
                   <p className="card-text">{description}</p>
-                  <a href={`profile/add/${id}`} className="btn btn-primary">Update Profile</a>
+                  <a href={`/add/${id}`} className="btn btn-primary">Update Profile</a>
                 </div>
               </div>
             );
