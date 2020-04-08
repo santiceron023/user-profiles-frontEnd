@@ -1,3 +1,5 @@
-.card-container{
-    
+.card{
+    display: flex;
+    text-align-last: center;
+    padding: 1rem;
 }
