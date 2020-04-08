@@ -17,29 +17,22 @@ export default class ProfileList extends React.Component {
   render() {
 
     return (
-      <div className="card-deck"> {
-      this.state.perfiles.map(
-        (perfil: Profile) => {
-          console.log(perfil);
+      <div className="card-columns card-container"> {
+        this.state.perfiles.map(
+          (perfil: Profile) => {
+            console.log(perfil);
 
-          return (
-            <div className="card" key={perfil.id} style={{width: '200px'}}>
-              <div className="image">
-                <img src={`data:image/jpeg;base64,${perfil.photo}`} style={{width: '200px',height: '200px'}} alt="usuario sin Foto" />
-              </div>
-              <div className="content">
-                <div className="header">{}</div>
-                <div className="meta">
-                  <a>{perfil.name}</a>
-                </div>
-                <div className="description">
-                  <a>{perfil.description}</a>
+            return (
+              <div className="card" key={perfil.id} style={{ width: '200px' ,backgroundColor: '#ecfbfc'}}>
+                <img className="card-img-top" src={`data:image/jpeg;base64,${perfil.photo}`} style={{ width: '200px', height: '200px' }} alt="User without Photo" />
+                <div className="card-body">
+                  <h5 className="card-title">{perfil.name}</h5>
+                  <p className="card-text">{perfil.description}</p>
                 </div>
               </div>
-            </div>
-          );
+            );
 
-        })
+          })
       }
       </div>
     )
