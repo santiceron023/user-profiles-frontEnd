@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-export class ProfileAdd extends React.Component {
-  state = { perfil: []};
+export default class ProfileAdd extends React.Component {
+  state = { wu: []};
 
   render() {
     return (<form>

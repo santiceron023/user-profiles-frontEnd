@@ -4,7 +4,7 @@ import { Profile } from './modelo/profile';
 import './profile-list.css';
 
 
-export class ProfileList extends React.Component {
+export default class ProfileList extends React.Component {
   state = { perfiles: [] };
 
   componentDidMount() {
@@ -17,14 +17,15 @@ export class ProfileList extends React.Component {
   render() {
 
     return (
+      <div className="card-deck"> {
       this.state.perfiles.map(
         (perfil: Profile) => {
           console.log(perfil);
 
           return (
-            <div className="card" key={perfil.id}>
+            <div className="card" key={perfil.id} style={{width: '200px'}}>
               <div className="image">
-                <img src={`data:image/jpeg;base64,${perfil.photo}`} alt="usuario sin Foto" />
+                <img src={`data:image/jpeg;base64,${perfil.photo}`} style={{width: '200px',height: '200px'}} alt="usuario sin Foto" />
               </div>
               <div className="content">
                 <div className="header">{}</div>
@@ -32,13 +33,15 @@ export class ProfileList extends React.Component {
                   <a>{perfil.name}</a>
                 </div>
                 <div className="description">
-                  <a>{perfil.desciption}</a>
+                  <a>{perfil.description}</a>
                 </div>
               </div>
             </div>
           );
 
         })
+      }
+      </div>
     )
   }
 

@@ -1,4 +1,6 @@
 import './index.css';
+import 'font-awesome/css/font-awesome.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
