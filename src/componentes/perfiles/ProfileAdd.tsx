@@ -120,6 +120,7 @@ export default class ProfileAdd extends React.Component<Props, any> {
       ProfilesRepository.uploadPhoto(this.state.id, data)
         .then((response: any) => {
           console.log('photo uploaded');
+          this.props.history.push(`/profile`)
         })
         .catch(error => {
           //this.setState({errors: error.response.data});
@@ -158,13 +159,14 @@ export default class ProfileAdd extends React.Component<Props, any> {
                   <button type="button" className="btn btn-primary"
                     onClick={() => this.onSaveProfile()}>Register</button>
                 </div>
-                { id &&
-                  <div className="col-6">
-                    <div className="form-group row">
-                      <div className="col">
-                        { id && photo && <img alt='this is for your profile' className='profile-picture' src={`data:image/jpeg;base64,${photo}`} /> }
-                        { (!id || !photo) && <img alt='this is for your profile' className='profile-picture' src="https://movecopenhagen.com/RegistrationForms/public/export/2019/images/teacher-217.png"/> }
-                      </div>
+                
+                <div className="col-6">
+                  <div className="form-group row">
+                    <div className="col">
+                      { id && photo && <img alt='this is for your profile' className='profile-picture' src={`data:image/jpeg;base64,${photo}`} /> }
+                      { (!id || !photo) && <img alt='this is for your profile' className='profile-picture' src="https://movecopenhagen.com/RegistrationForms/public/export/2019/images/teacher-217.png"/> }
+                    </div>
+                    { id &&
                       <div className="col">
                         <div className="form-group row">
                           <input type="file" className="form-control-file" id="photo"
@@ -177,9 +179,9 @@ export default class ProfileAdd extends React.Component<Props, any> {
                           </div>
                         }
                       </div>
-                    </div>
+                    }
                   </div>
-                }
+                </div>
               </div>
               { errors && 
                 <div className="row">
