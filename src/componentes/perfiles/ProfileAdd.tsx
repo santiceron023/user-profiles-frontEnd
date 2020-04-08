@@ -1,12 +1,16 @@
 import * as React from 'react';
+import { RouteComponentProps } from 'react-router';
 import { ProfilesRepository } from '../../api/profiles.repository';
 import { Profile } from './modelo/profile';
 
-interface Props {}
+interface MatchParams {
+  id: string;
+}
+
+interface Props extends RouteComponentProps<MatchParams> {
+}
 
 export default class ProfileAdd extends React.Component<Props, any> {
-  
-  static propTypes = {};
 
   constructor(props: Props) {
     super(props);
@@ -17,6 +21,31 @@ export default class ProfileAdd extends React.Component<Props, any> {
       selectedPhoto: null,
       photo: null,
       errors: ''
+    }
+  }
+
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    
+    if(this.isValidId(id)) {
+      ProfilesRepository.find(this.props.match.params.id)
+        .then((response: any) => {
+          this.setState({
+            id: response.data.id, 
+            name: response.data.name, 
+            description: response.data.description, 
+            selectedPhoto: null, 
+            photo: response.data.photo, 
+            errors: ''
+          });
+        })
+        .catch(error => {
+          console.log(error.response.data);
+        })
+    } else {
+      this.setState({
+        id: null, name: '', description: '', selectedPhoto: null, photo: null, errors: ''
+      });
     }
   }
 
@@ -34,6 +63,10 @@ export default class ProfileAdd extends React.Component<Props, any> {
     }
   }
 
+  isValidId = (id: string) => {
+    return id !== null && id !== undefined && id !== '0';
+  } 
+
   onSaveProfile = () => {
     const { id, name, description } = this.state;
 
@@ -45,22 +78,55 @@ export default class ProfileAdd extends React.Component<Props, any> {
       this.setState({errors: 'You must write a description'});
       return;
     }
-    
-    console.log('save');
+
     let newProfile: Profile = {
       id: id,
       name: name.trim(),
       description: description.trim(),
       photo: null
     }
+
+    if(id === null) {
+      this.callCreateProfile(newProfile);
+    } else {
+      this.callUpdateProfile(id, newProfile);
+    }
+  }
+
+  callCreateProfile = (newProfile : Profile) => {
     ProfilesRepository.create(newProfile)
-      .then((response: any) => {
-        console.log('saved!!');
-      })
-      .catch(error => {
-        console.log(error.response.data);
-        this.setState({errors: error.response.data});
-      })
+        .then((response: any) => {
+          this.setState({id: response.data});
+        })
+        .catch(error => {
+          //this.setState({errors: error.response.data});
+        });
+  }
+
+  callUpdateProfile = (id: string, profile : Profile) => {
+    ProfilesRepository.update(id, profile)
+        .then((response: any) => {
+          console.log('updated');
+        })
+        .catch(error => {
+          //this.setState({errors: error.response.data});
+        });
+  }
+
+  uploadPhoto = () => {
+    if(this.state.id && this.state.selectedPhoto) {
+      let data = new FormData();
+      data.append('file', this.state.selectedPhoto);
+      ProfilesRepository.uploadPhoto(this.state.id, data)
+        .then((response: any) => {
+          console.log('photo uploaded');
+        })
+        .catch(error => {
+          //this.setState({errors: error.response.data});
+        });
+    } else {
+      this.setState({errors: 'You must select a picture'});
+    }
   }
 
   render() {
@@ -92,22 +158,28 @@ export default class ProfileAdd extends React.Component<Props, any> {
                   <button type="button" className="btn btn-primary"
                     onClick={() => this.onSaveProfile()}>Register</button>
                 </div>
-                <div className="col-6">
-                  <div className="form-group row">
-                    <div className="col">
-                      <img alt='this is for your profile' className='profile-picture' src="https://movecopenhagen.com/RegistrationForms/public/export/2019/images/teacher-217.png"/>
-                    </div>
-                    <div className="col">
-                      <div className="form-group row">
-                        <input type="file" className="form-control-file" id="photo"
-                          onChange={(e) => this.onChangeSelectedPhoto(e)}/>
+                { id &&
+                  <div className="col-6">
+                    <div className="form-group row">
+                      <div className="col">
+                        { id && photo && <img alt='this is for your profile' className='profile-picture' src={`data:image/jpeg;base64,${photo}`} /> }
+                        { (!id || !photo) && <img alt='this is for your profile' className='profile-picture' src="https://movecopenhagen.com/RegistrationForms/public/export/2019/images/teacher-217.png"/> }
                       </div>
-                      <div className="form-group row">
-                        <button type="button" className="btn btn-primary">Upload photo</button>
+                      <div className="col">
+                        <div className="form-group row">
+                          <input type="file" className="form-control-file" id="photo"
+                            onChange={(e) => this.onChangeSelectedPhoto(e)}/>
+                        </div>
+                        { selectedPhoto && 
+                          <div className="form-group row">
+                            <button type="button" className="btn btn-primary"
+                              onClick={() => this.uploadPhoto()}>Upload photo</button>
+                          </div>
+                        }
                       </div>
                     </div>
                   </div>
-                </div>
+                }
               </div>
               { errors && 
                 <div className="row">

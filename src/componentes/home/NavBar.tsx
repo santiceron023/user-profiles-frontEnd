@@ -7,7 +7,7 @@ export const NavBar: React.FC = () => {
       <React.Fragment>
         <Link to="/" replace={true} className="link">Home</Link>
         
-        <Link to="/profile/add" className="link">Add Profile</Link>
+        <Link to="/profile/add/0" className="link">Add Profile</Link>
         
         <Link to="/profile" className="link">Profiles</Link>
       </React.Fragment>
