@@ -4,7 +4,7 @@ export const Home: React.FC = () => {
 
   return (
       <div>
-        Bienvenidos este es el Home
+        Wellcome to profile app admin.
       </div>
 
   );

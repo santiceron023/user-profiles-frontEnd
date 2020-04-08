@@ -9,7 +9,8 @@
 .nav-bar-header {
   width: 70%;
   text-align-last: start;
-  display: inline-block;
+  display: flex;
   font-size: calc(10px + 2vmin);
+  justify-content: space-around;
   color: rgb(49, 0, 128);
 }

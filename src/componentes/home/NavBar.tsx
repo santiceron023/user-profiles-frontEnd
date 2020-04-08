@@ -6,9 +6,10 @@ export const NavBar: React.FC = () => {
   return (
       <React.Fragment>
         <Link to="/" replace={true} className="link">Home</Link>
-        <span> </span>
-        <Link to="/productos" className="link">Productos</Link>
-        <Link to="/perfiles" className="link">Perfiles</Link>
+        
+        <Link to="/profile/add" className="link">Add Profile</Link>
+        
+        <Link to="/profile" className="link">Profiles</Link>
       </React.Fragment>
   );
 
