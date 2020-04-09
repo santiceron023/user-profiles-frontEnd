@@ -9,7 +9,7 @@ export const NavBar: React.FC = () => {
         
         <Link to="/add/0" className="link">Add Profile</Link>
         
-        <Link to="/" className="link">Profiles</Link>
+        <Link to="/" className="link">Profiles App</Link>
       </React.Fragment>
   );
 

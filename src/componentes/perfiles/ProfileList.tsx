@@ -34,7 +34,7 @@ export default class ProfileList extends React.Component<Props, any> {
 
             return (
               <div className="card card-profile-list" key={id}>
-                <img className="card-img-top" src={photo} alt="User without Photo"
+                <img className="card-img-top" src={photo} alt="Not uploaded"
                   style={{ width: '200px', height: '200px' }} />
                 <div className="card-body">
                   <h4 className="card-title">{name}</h4>
